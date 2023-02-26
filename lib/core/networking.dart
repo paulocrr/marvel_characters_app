@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Networking {
   late Dio _client;
@@ -9,7 +10,7 @@ class Networking {
   Networking({Dio? client}) {
     if (client == null) {
       _client = Dio(
-        BaseOptions(baseUrl: 'http://gateway.marvel.com'),
+        BaseOptions(baseUrl: dotenv.env['URL']!),
       );
     } else {
       _client = client;
@@ -18,8 +19,8 @@ class Networking {
 
   String get _signParameters {
     final timestamp = DateTime.now().toString();
-    final publicKey = '7e34ba9cf61f21b17560f16cd58ea6e6';
-    final privateKey = 'f2040fe74a6cd6debd4fb4e177d096677d1ded23';
+    final publicKey = dotenv.env['PUBLIC_KEY']!;
+    final privateKey = dotenv.env['PRIVATE_KEY']!;
 
     final hash = md5
         .convert(
