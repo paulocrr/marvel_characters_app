@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:marvel_characters_app/models/character.dart';
+import 'package:marvel_characters_app/pages/character_details_page.dart';
 import 'package:marvel_characters_app/services/characters_service.dart';
 import 'package:marvel_characters_app/widgets/character_item.dart';
 import 'package:marvel_characters_app/widgets/marvel_progress_indicator.dart';
@@ -53,7 +54,17 @@ class _ListCharactersPageState extends State<ListCharactersPage> {
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Character>(
           itemBuilder: (_, item, index) {
-            return CharacterItem(character: item);
+            return CharacterItem(
+              character: item,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CharacterDetailsPage(id: item.id),
+                  ),
+                );
+              },
+            );
           },
           firstPageProgressIndicatorBuilder: (_) =>
               const MarvelProgressIndicator(),

@@ -1,4 +1,5 @@
 import 'package:marvel_characters_app/core/networking.dart';
+import 'package:marvel_characters_app/models/character_details.dart';
 import 'package:marvel_characters_app/models/characters_response.dart';
 
 class CharactersService {
@@ -23,5 +24,11 @@ class CharactersService {
     );
 
     return CharactersResponse.fromJson(response);
+  }
+
+  Future<CharacterDetails> getCharacterDetails({required int id}) async {
+    final response = await _client.get(path: '$_path/$id');
+
+    return CharacterDetails.fromJson(response);
   }
 }

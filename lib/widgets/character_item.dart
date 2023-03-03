@@ -3,8 +3,9 @@ import 'package:marvel_characters_app/models/character.dart';
 
 class CharacterItem extends StatelessWidget {
   final Character character;
+  final VoidCallback? onTap;
 
-  const CharacterItem({super.key, required this.character});
+  const CharacterItem({super.key, required this.character, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class CharacterItem extends StatelessWidget {
         backgroundImage: NetworkImage(character.thumbnail ?? ""),
       ),
       title: Text(character.name ?? ""),
+      onTap: onTap,
     );
   }
 }
