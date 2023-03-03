@@ -45,7 +45,10 @@ class _DetailsInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Image.network(details.thumbnail ?? ""),
+        Hero(
+          tag: details.id,
+          child: Image.network(details.thumbnail ?? ""),
+        ),
         const SizedBox(height: 8),
         Text(
           details.name,

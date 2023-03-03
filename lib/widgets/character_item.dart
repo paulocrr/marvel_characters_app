@@ -10,8 +10,11 @@ class CharacterItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(character.thumbnail ?? ""),
+      leading: Hero(
+        tag: character.id,
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(character.thumbnail ?? ""),
+        ),
       ),
       title: Text(character.name ?? ""),
       onTap: onTap,
